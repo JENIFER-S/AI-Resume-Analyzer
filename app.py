@@ -28,10 +28,6 @@ SKILLS = [
 # Home page route
 @app.route('/')
 def home():
-
-    if 'user' not in session:
-        return redirect('/login')
-
     return render_template('index.html')
 @app.route('/login')
 def login():
