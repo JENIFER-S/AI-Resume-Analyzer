@@ -158,60 +158,23 @@ def analyze():
     print("Matched Skills:", matched)
     print("Missing Skills:", missing)
 
-
-     """   # Database Connection
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password=os.getenv("MYSQL_PASSWORD"),
-        database="resume_analyzer"
-    )
-
-    cursor = conn.cursor()
-
-    query = """
-    INSERT INTO analysis_history
-    (resume_name, match_percentage, matched_skills, missing_skills)
-    VALUES (%s, %s, %s, %s)
-    """
-
-    values = (
-        resume.filename,
-        percentage,
-        ", ".join(matched),
-        ", ".join(missing)
-    )
-
-    cursor.execute(query, values)
-
-    conn.commit()
-
-    cursor.close()
-    conn.close()  """  
     resume_data = {
+        "resume_name": resume.filename,
+        "match_percentage": percentage,
+        "matched_skills": matched,
+        "missing_skills": missing,
+        "resume_skills": found_skills
+    }
 
-    "resume_name": resume.filename,
-
-    "match_percentage": percentage,
-
-    "matched_skills": matched,
-
-    "missing_skills": missing,
-
-    "resume_skills": found_skills
-
-}
-
-    #resume_collection.insert_one(resume_data)
-    # Send data to result.html
     return render_template(
-    "result.html",
-    percentage=percentage,
-    matched=matched,
-    missing=missing,
-    found_skills=found_skills,
-    ai_result=ai_result
-)
+        "result.html",
+        percentage=percentage,
+        matched=matched,
+        missing=missing,
+        found_skills=found_skills,
+        ai_result=ai_result
+    )
+   
 @app.route('/dashboard')
 def dashboard():
     if 'user' not in session:
