@@ -159,7 +159,7 @@ def analyze():
     print("Missing Skills:", missing)
 
 
-        # Database Connection
+     """   # Database Connection
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -187,7 +187,7 @@ def analyze():
     conn.commit()
 
     cursor.close()
-    conn.close()    
+    conn.close()  """  
     resume_data = {
 
     "resume_name": resume.filename,
